@@ -88,6 +88,8 @@ Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => 'auth']
     Route::group(['prefix' => 'mobils'], function () {
         Route::get('/', [MobilController::class, 'index'])->name('mobil.index')->middleware('permission:lihat mobil');
         Route::get('mobil/get_data', [MobilController::class, 'show']);
+        Route::get('/getmobil',[MobilController::class, 'show'])->name('mobil.getdata');
+
 
     });
 
