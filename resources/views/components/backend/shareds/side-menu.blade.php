@@ -31,7 +31,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('backend.mobil.index') }}" target="_blank" class="nav-link">
+                <a href="{{ route('mobil.index') }}" target="_blank" class="nav-link">
                     <i class="nav-icon fas fa-thumbtack"></i>
                     <p>
                         {{ __('Mobil') }}

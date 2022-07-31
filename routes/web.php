@@ -41,6 +41,9 @@ Route::post('/updateCountryDetails',[CountriesController::class, 'updateCountryD
 Route::post('/deleteCountry',[CountriesController::class,'deleteCountry'])->name('delete.country');
 Route::post('/deleteSelectedCountries',[CountriesController::class,'deleteSelectedCountries'])->name('delete.selected.countries');
 
+Route::RESOURCE('mobil',  MobilController::class );
+Route::get('mobil/get_data', [MobilController::class,'show'])->name('mobil.get_data');
+
 Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => 'auth'], function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index')->middleware('permission:lihat dasbor');
@@ -86,9 +89,6 @@ Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => 'auth']
         Route::put('/users/{user}/resetpassword', [ResetPasswordUserController::class, 'resetPassword'])->name('users.reset.password')->middleware('permission:ubah pengguna');
     });
     Route::group(['prefix' => 'mobils'], function () {
-        Route::get('/', [MobilController::class, 'index'])->name('mobil.index')->middleware('permission:lihat mobil');
-        Route::get('mobil/get_data', [MobilController::class, 'show']);
-        Route::get('/getmobil',[MobilController::class, 'show'])->name('mobil.getdata');
 
 
     });

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Mobil;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 
 class MobilController extends Controller
@@ -56,16 +57,17 @@ class MobilController extends Controller
     {
         try
         {
+
             $row = Mobil::get();
 
             return DataTables::of($row)
-
-
+                ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    return '<button id="' . $row->id . '" class="btn btn-xs edit"><i class="glyphicon glyphicon-edit"></i></button>
-                    <button id="' . $row->id . '" class="btn btn-xs  delete" ><i class="glyphicon glyphicon-trash"></i> </button>';
+                    return ' <button href="" class="btn btn-warning btn-sm edit"><i class="fas fa-edit mr-2"></i></button>
+                            <button href="" class="btn btn-danger btn-sm delete"><i class="fas fa-trash mr-2"></i></button>
+                    ';
                 })
-                ->rawColumns(['kategori', 'action'])
+                ->rawColumns([ 'action'])
 
                 ->make(true);
         } catch (\Exception $e) {
