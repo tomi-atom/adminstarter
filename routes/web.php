@@ -8,7 +8,9 @@ use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\ResetPasswordUserController;
 use App\Http\Controllers\Backend\SettingController;
+use App\Http\Controllers\CountriesController;
 use App\Http\Controllers\MobilController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -88,4 +90,13 @@ Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => 'auth']
         Route::put('/updatelogo/{setting}/', [SettingController::class, 'updateLogo'])->name('setting.update.logo')->middleware('permission:ubah pengaturan');
         Route::put('/updatefrontimage/{setting}/', [SettingController::class, 'updateFrontImage'])->name('setting.update.front.image')->middleware('permission:ubah pengaturan');
     });
+
+
+    Route::get('/countries-list',[CountriesController::class, 'index'])->name('countries.list');
+    Route::post('/add-country',[CountriesController::class,'addCountry'])->name('add.country');
+    Route::get('/getCountriesList',[CountriesController::class, 'getCountriesList'])->name('get.countries.list');
+    Route::post('/getCountryDetails',[CountriesController::class, 'getCountryDetails'])->name('get.country.details');
+    Route::post('/updateCountryDetails',[CountriesController::class, 'updateCountryDetails'])->name('update.country.details');
+    Route::post('/deleteCountry',[CountriesController::class,'deleteCountry'])->name('delete.country');
+    Route::post('/deleteSelectedCountries',[CountriesController::class,'deleteSelectedCountries'])->name('delete.selected.countries');
 });
