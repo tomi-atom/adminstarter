@@ -9,6 +9,7 @@ use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\ResetPasswordUserController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\CountriesController;
+use App\Http\Controllers\KursusController;
 use App\Http\Controllers\MobilController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -43,6 +44,9 @@ Route::post('/deleteSelectedCountries',[CountriesController::class,'deleteSelect
 
 Route::RESOURCE('mobil',  MobilController::class );
 Route::get('mobil/get_data', [MobilController::class,'show'])->name('mobil.get_data');
+
+Route::RESOURCE('kursus',  KursusController::class );
+Route::get('kursus/get_data', [KursusController::class,'show'])->name('kursus.get_data');
 
 Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => 'auth'], function () {
 
@@ -88,10 +92,7 @@ Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => 'auth']
 
         Route::put('/users/{user}/resetpassword', [ResetPasswordUserController::class, 'resetPassword'])->name('users.reset.password')->middleware('permission:ubah pengguna');
     });
-    Route::group(['prefix' => 'mobils'], function () {
 
-
-    });
 
     Route::group(['prefix' => 'settings'], function () {
         Route::get('/index', [SettingController::class, 'index'])->name('setting.index')->middleware('permission:lihat pengaturan');

@@ -9,6 +9,6 @@ class Kursus extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'id_peserta', 'id_instruktur', 'jemput', 'biaya_jemput', 'sim', 'biaya_sim', 'diskon', 'status'
+        'id', 'id_instruktur', 'jemput', 'biaya_jemput', 'sim', 'biaya_sim', 'diskon', 'status'
     ];
 }

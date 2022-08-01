@@ -1,15 +1,15 @@
 @extends('layouts.main')
 
-@section('title', 'Mobil')
+@section('title', 'Kursus')
 
 @section('breadcump')
     <div class="col-sm-6">
-        <h1 class="m-0">{{ __('Mobil') }}</h1>
+        <h1 class="m-0">{{ __('Kursus') }}</h1>
     </div>
     <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{ route('backend.dashboard.index') }}">{{ __('Home') }}</a></li>
-            <li class="breadcrumb-item active">{{ __('Mobil') }}</li>
+            <li class="breadcrumb-item active">{{ __('Kursus') }}</li>
         </ol>
     </div>
     <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">
@@ -37,11 +37,11 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">
-                        {{ __('Data Mobil') }}
+                        {{ __('Data Kursus') }}
                     </h3>
                 </div>
                 <div class="card-body">
-                    @can('tambah Mobil')
+                    @can('tambah Kursus')
                         <div class="text-right mb-3">
                             <button  class="btn btn-primary pull-right create">
                                 <i class="fas fa-plus-circle mr-2"></i>
@@ -55,10 +55,11 @@
                                 <thead>
                                 <tr>
                                     <th >NO</th>
-                                    <th >No. Plat</th>
-                                    <th >Merk Mobil</th>
-                                    <th >Jenis Mobil</th>
-                                    <th >Foto</th>
+                                    <th >Peserta</th>
+                                    <th >Jemput </th>
+                                    <th >SIM</th>
+                                    <th >Biaya Kursus</th>
+                                    <th >Pembayaran</th>
                                     <th >Aksi</th>
                                 </tr>
                                 </thead>
@@ -82,18 +83,71 @@
                     <div class="modal-body">
 
                         <div class="form-group">
-                            <label for="no_plat">Nomor Plat</label>
-                            <input type="text" class="form-control no_plat" name="no_plat" placeholder="Nomor Plat" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="merk_mobil">Merk Mobil</label>
-                            <input type="text" class="form-control merk_mobil" name="merk_mobil" placeholder="Merk Mobil" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="jenis_mobil">Jenis Mobil</label>
-                            <input type="text" class="form-control jenis_mobil" name="jenis_mobil" placeholder="Jenis Mobil" required>
+                            <label >Peserta</label>
+                            <select name="id_peserta" id="id_peserta" class="form-control" required>
+                                <option value="">Pilih </option>
+                                @foreach($peserta as $list)
+                                    <option value="{{ $list->id }}">{{ $list->name}}</option>
+
+                                @endforeach
+                            </select>
                         </div>
 
+                        <div class="form-group">
+                            <label >Biaya Kursus</label>
+                            <input type="text" class="form-control biaya" name="biaya" placeholder="Biaya" required>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <!-- text input -->
+                                <div class="form-group">
+                                    <label>Jemput</label>
+                                    <select class="form-control" id="jemput" name="jemput" required>
+                                        <option value="1"> Ya</option>
+                                        <option value="0"> Tidak </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label >Biaya Jemput</label>
+                                    <input type="text" class="form-control biaya_jemput" name="biaya_jemput" placeholder="Biaya Jemput" >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>SIM</label>
+                                    <select class="form-control" id="sim" name="sim" required>
+                                        <option value="1"> Ya</option>
+                                        <option value="0"> Tidak </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label >Biaya SIM</label>
+                                    <input type="text" class="form-control biaya_sim" name="biaya_sim" placeholder="Biaya SIM" >
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <label >Diskon</label>
+                            <input type="text" class="form-control diskon" name="diskon" placeholder="Diskon" >
+                        </div>
+                        <div class="form-group">
+                            <label for="status">Status</label>
+                            <select class="form-control" id="status" name="status" required>
+                                <option value="1"> Aktif</option>
+                                <option value="0"> Tidak Aktif </option>
+                            </select>
+                        </div>
 
 
                     </div>
@@ -127,12 +181,12 @@
                             <input type="text" class="form-control no_plat" name="no_plat" placeholder="Nomor Plat" required>
                         </div>
                         <div class="form-group">
-                            <label for="merk_mobil">Merk Mobil</label>
-                            <input type="text" class="form-control merk_mobil" name="merk_mobil" placeholder="Merk Mobil" required>
+                            <label for="merk_kursus">Merk Kursus</label>
+                            <input type="text" class="form-control merk_kursus" name="merk_kursus" placeholder="Merk Kursus" required>
                         </div>
                         <div class="form-group">
-                            <label for="jenis_mobil">Jenis Mobil</label>
-                            <input type="text" class="form-control jenis_mobil" name="jenis_mobil" placeholder="Jenis Mobil" required>
+                            <label for="jenis_kursus">Jenis Kursus</label>
+                            <input type="text" class="form-control jenis_kursus" name="jenis_kursus" placeholder="Jenis Kursus" required>
                         </div>
 
 
@@ -166,13 +220,14 @@
             $('#mytable').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('mobil.get_data') }}",
+                ajax: "{{ route('kursus.get_data') }}",
                 columns: [
                     {data:'DT_RowIndex'},
-                    {data:'no_plat'},
-                    {data:'merk_mobil'},
-                    {data:'jenis_mobil'},
-                    {data:'foto'},
+                    {data:'peserta'},
+                    {data:'jemput'},
+                    {data:'sim'},
+                    {data:'biaya'},
+                    {data:'pembayaran'},
                     {data:'action', orderable:false, searchable:false},
                 ]
             });
@@ -214,7 +269,7 @@
                 token();
 
                 $.ajax({
-                    url: 'mobil/' + id + '/edit',
+                    url: 'kursus/' + id + '/edit',
                     method: 'get',
                     success: function (result) {
 
@@ -223,8 +278,8 @@
 
                             $('.id').val(json.id);
                             $('.no_plat').val(json.no_plat);
-                            $('.merk_mobil').val(json.merk_mobil);
-                            $('.jenis_mobil').val(json.jenis_mobil);
+                            $('.merk_kursus').val(json.merk_kursus);
+                            $('.jenis_kursus').val(json.jenis_kursus);
 
 
                             $('#modalEdit').modal('show');
@@ -247,13 +302,19 @@
 
                 var data = {
                     '_token': $('input[name=_token]').val(),
-                    no_plat: formData[0].value,
-                    merk_mobil: formData[1].value,
-                    jenis_mobil: formData[2].value,
+                    id_peserta: formData[0].value,
+                    id_instruktur: formData[1].value,
+                    biaya: formData[2].value,
+                    jemput: formData[3].value,
+                    biaya_jemput: formData[4].value,
+                    sim: formData[5].value,
+                    biaya_sim: formData[6].value,
+                    diskon: formData[7].value,
+                    status: formData[9].value,
                 };
 
                 $.ajax({
-                    url: "mobil",
+                    url: "kursus",
                     method: 'post',
                     data: data,
                     success: function (result) {
@@ -278,12 +339,12 @@
                 var data = {
                     '_token': $('input[name=_token]').val(),
                     no_plat: formData[1].value,
-                    merk_mobil: formData[2].value,
-                    jenis_mobil: formData[3].value,
+                    merk_kursus: formData[2].value,
+                    jenis_kursus: formData[3].value,
                 };
 
                 $.ajax({
-                    url: "mobil/" + id,
+                    url: "kursus/" + id,
                     method: 'PUT',
                     data: data,
                     success: function (result) {
@@ -324,7 +385,7 @@
                             token();
 
                             $.ajax({
-                                url: 'mobil/' + id,
+                                url: 'kursus/' + id,
                                 method: 'DELETE',
                                 dataType: 'json',
                                 data: {id:id,"_token": "{{ csrf_token() }}"},

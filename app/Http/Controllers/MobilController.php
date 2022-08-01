@@ -41,7 +41,7 @@ class MobilController extends Controller
         {
             Mobil::create($request->all());
 
-            return response()->json(['success' => 'data berhasil ditambahkan'], 200);
+            return response()->json(['success' => 'Data berhasil ditambahkan'], 200);
         } catch (\Exception $e) {
             dd($e->getMessage());
         }
@@ -63,8 +63,8 @@ class MobilController extends Controller
             return DataTables::of($row)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    return ' <button href="" class="btn btn-warning btn-sm edit"><i class="fas fa-edit mr-2"></i></button>
-                            <button href="" class="btn btn-danger btn-sm delete"><i class="fas fa-trash mr-2"></i></button>
+                    return ' <button id="' . $row->id . '" class="btn btn-warning btn-sm edit"><i class="fas fa-edit mr-2"></i></button>
+                            <button id="' . $row->id . '" class="btn btn-danger btn-sm delete"><i class="fas fa-trash mr-2"></i></button>
                     ';
                 })
                 ->rawColumns([ 'action'])
@@ -81,11 +81,16 @@ class MobilController extends Controller
      * @param  \App\Models\Mobil  $mobil
      * @return \Illuminate\Http\Response
      */
-    public function edit(Mobil $mobil)
+    public function edit($id)
     {
         try
         {
-            return response()->json(['success' => 'successfull retrieve data', 'data' => $mobil->toJson()], 200);
+
+            $data = Mobil::where('id',$id)->first();
+            if($data){
+                return response()->json(['success' => 'successfull retrieve data', 'data' => $data->toJson()], 200);
+            }
+
 
         } catch (\Exception $e) {
             dd($e->getMessage());
@@ -99,15 +104,18 @@ class MobilController extends Controller
      * @param  \App\Models\Mobil  $mobil
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Mobil $mobil)
+    public function update(Request $request, $id)
     {
         try
         {
 
-            $mobil = Program::findOrFail($mobil->id);
-            $mobil->update();
+            $data = Mobil::findOrFail($id);
+            $data->no_plat = $request->no_plat;
+            $data->merk_mobil = $request->merk_mobil;
+            $data->jenis_mobil = $request->jenis_mobil;
+            $data->update();
 
-            return response()->json(['success' => 'data is successfully updated'], 200);
+            return response()->json(['success' => 'Data is successfully updated'], 200);
         } catch (\Exception $e) {
             dd($e->getMessage());
         }
@@ -125,7 +133,7 @@ class MobilController extends Controller
         {
             Mobil::destroy($mobil->id);
 
-            return response()->json(['success' => 'data is successfully deleted'], 200);
+            return response()->json(['success' => 'Data is successfully deleted'], 200);
         } catch (\Exception $e) {
             dd($e->getMessage());
         }

@@ -15,15 +15,15 @@
         <li class="nav-header">{{ __('Kursus') }}</li>
 
             <li class="nav-item">
-                <a href="{{ route('home.index') }}" target="_blank" class="nav-link">
+                <a href="{{ route('kursus.index') }}" class="nav-link">
                     <i class="nav-icon fas fa-thumbtack"></i>
                     <p>
-                        {{ __('Pendaftaran Kursus') }}
+                        {{ __('Peserta Kursus') }}
                     </p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('home.index') }}" target="_blank" class="nav-link">
+                <a href="{{ route('home.index') }}"  class="nav-link">
                     <i class="nav-icon fas fa-thumbtack"></i>
                     <p>
                         {{ __('Jadwal') }}
@@ -31,7 +31,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('mobil.index') }}" target="_blank" class="nav-link">
+                <a href="{{ route('mobil.index') }}"  class="nav-link">
                     <i class="nav-icon fas fa-thumbtack"></i>
                     <p>
                         {{ __('Mobil') }}

@@ -29,7 +29,12 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "files":[
+            "app/Helpers/TanggalIndonesia.php",
+            "app/Helpers/FormatUang.php",
+            "app/Helpers/AngkaTerbilang.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
