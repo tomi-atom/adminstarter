@@ -70,6 +70,192 @@
             </div>
         </div>
     </div>
+    <div  id="modalEdit" class="modal fade" id="modal-lg">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Large Modal</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="update" >
+                    <div class="modal-body">
+                        <input type="hidden" name="id" class="id">
+                        <div class="form-group">
+                            <label >Peserta</label>
+                            <select name="id_peserta" id="id_peserta" class="form-control" required>
+                                <option value="">Pilih </option>
+                                @foreach($peserta as $list)
+                                    <option value="{{ $list->id }}">{{ $list->name}}</option>
+
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label >Biaya Kursus</label>
+                            <input type="text" class="form-control biaya" name="biaya" placeholder="Biaya" required>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <!-- text input -->
+                                <div class="form-group">
+                                    <label>Jemput</label>
+                                    <select class="form-control" id="jemput" name="jemput" required>
+                                        <option value="1"> Ya</option>
+                                        <option value="0"> Tidak </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label >Biaya Jemput</label>
+                                    <input type="text" class="form-control biaya_jemput" name="biaya_jemput" placeholder="Biaya Jemput" >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>SIM</label>
+                                    <select class="form-control" id="sim" name="sim" required>
+                                        <option value="1"> Ya</option>
+                                        <option value="0"> Tidak </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label >Biaya SIM</label>
+                                    <input type="text" class="form-control biaya_sim" name="biaya_sim" placeholder="Biaya SIM" >
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <label >Diskon</label>
+                            <input type="text" class="form-control diskon" name="diskon" placeholder="Diskon" >
+                        </div>
+                        <div class="form-group">
+                            <label for="status">Status</label>
+                            <select class="form-control" id="status" name="status" required>
+                                <option value="1"> Aktif</option>
+                                <option value="0"> Tidak Aktif </option>
+                            </select>
+                        </div>
+
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary btn-save"><i class="fa fa-floppy-o"></i> Update </button>
+                        <button type="button" class="btn btn-warning" data-dismiss="modal"><i class="fa fa-arrow-circle-left"></i> Batal </button>
+                    </div>
+
+                </form>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <div  id="modalBayar" class="modal fade" id="modal-lg">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Large Modal</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="update" >
+                    <div class="modal-body">
+                        <input type="hidden" name="id" class="id">
+                        <div class="form-group">
+                            <label >Peserta</label>
+                            <select name="id_peserta" id="id_peserta" class="form-control" required>
+                                <option value="">Pilih </option>
+                                @foreach($peserta as $list)
+                                    <option value="{{ $list->id }}">{{ $list->name}}</option>
+
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label >Biaya Kursus</label>
+                            <input type="text" class="form-control biaya" name="biaya" placeholder="Biaya" required>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <!-- text input -->
+                                <div class="form-group">
+                                    <label>Jemput</label>
+                                    <select class="form-control" id="jemput" name="jemput" required>
+                                        <option value="1"> Ya</option>
+                                        <option value="0"> Tidak </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label >Biaya Jemput</label>
+                                    <input type="text" class="form-control biaya_jemput" name="biaya_jemput" placeholder="Biaya Jemput" >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>SIM</label>
+                                    <select class="form-control" id="sim" name="sim" required>
+                                        <option value="1"> Ya</option>
+                                        <option value="0"> Tidak </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label >Biaya SIM</label>
+                                    <input type="text" class="form-control biaya_sim" name="biaya_sim" placeholder="Biaya SIM" >
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <label >Diskon</label>
+                            <input type="text" class="form-control diskon" name="diskon" placeholder="Diskon" >
+                        </div>
+                        <div class="form-group">
+                            <label for="status">Status</label>
+                            <select class="form-control" id="status" name="status" required>
+                                <option value="1"> Aktif</option>
+                                <option value="0"> Tidak Aktif </option>
+                            </select>
+                        </div>
+
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary btn-save"><i class="fa fa-floppy-o"></i> Update </button>
+                        <button type="button" class="btn btn-warning" data-dismiss="modal"><i class="fa fa-arrow-circle-left"></i> Batal </button>
+                    </div>
+
+                </form>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
     <div  id="modalAdd" class="modal fade" id="modal-lg">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -87,7 +273,8 @@
                             <select name="id_peserta" id="id_peserta" class="form-control" required>
                                 <option value="">Pilih </option>
                                 @foreach($peserta as $list)
-                                    <option value="{{ $list->id }}">{{ $list->name}}</option>
+
+                                    <option value="{{ $list->id }} ">{{ $list->name}}</option>
 
                                 @endforeach
                             </select>
@@ -163,46 +350,7 @@
         <!-- /.modal-dialog -->
     </div>
 
-    <div  id="modalEdit" class="modal fade" id="modal-lg">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Large Modal</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form id="update" >
-                    <div class="modal-body">
-                        <input type="hidden" name="id" class="id">
 
-                        <div class="form-group">
-                            <label for="no_plat">Nomor Plat</label>
-                            <input type="text" class="form-control no_plat" name="no_plat" placeholder="Nomor Plat" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="merk_kursus">Merk Kursus</label>
-                            <input type="text" class="form-control merk_kursus" name="merk_kursus" placeholder="Merk Kursus" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="jenis_kursus">Jenis Kursus</label>
-                            <input type="text" class="form-control jenis_kursus" name="jenis_kursus" placeholder="Jenis Kursus" required>
-                        </div>
-
-
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary btn-save"><i class="fa fa-floppy-o"></i> Update </button>
-                        <button type="button" class="btn btn-warning" data-dismiss="modal"><i class="fa fa-arrow-circle-left"></i> Batal </button>
-                    </div>
-
-                </form>
-            </div>
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-    </div>
 
 
     <script src="{{ asset('jquery/jquery-3.6.0.min.js') }}"></script>
@@ -277,13 +425,52 @@
                             let json = jQuery.parseJSON(result.data);
 
                             $('.id').val(json.id);
-                            $('.no_plat').val(json.no_plat);
-                            $('.merk_kursus').val(json.merk_kursus);
-                            $('.jenis_kursus').val(json.jenis_kursus);
+                            $('.id_peserta').val(json.id_peserta);
+                            $('.biaya').val(json.biaya);
+                            $('#jemput').val(json.jemput);
+                            $('.biaya_jemput').val(json.biaya_jemput);
+                            $('#sim').val(json.sim);
+                            $('.biaya_sim').val(json.biaya_sim);
+                            $('.diskon').val(json.diskon);
 
 
                             $('#modalEdit').modal('show');
                             $('.modal-title').text('Update Data');
+                        }
+
+                    }
+                });
+
+
+            });
+
+            //edit
+            $(document).on('click', '.bayar', function (e) {
+                e.preventDefault();
+                var id = $(this).attr('id');
+
+                token();
+
+                $.ajax({
+                    url: 'pembayaran/' + id + '/edit',
+                    method: 'get',
+                    success: function (result) {
+
+                        if (result.success) {
+                            let json = jQuery.parseJSON(result.data);
+
+                            $('.id').val(json.id);
+                            $('#id_peserta').val(json.id_peserta);
+                            $('.biaya').val(json.biaya);
+                            $('#jemput').val(json.jemput);
+                            $('.biaya_jemput').val(json.biaya_jemput);
+                            $('#sim').val(json.sim);
+                            $('.biaya_sim').val(json.biaya_sim);
+                            $('.diskon').val(json.diskon);
+
+
+                            $('#modalBayar').modal('show');
+                            $('.modal-title').text('Input Pembayaran');
                         }
 
                     }
@@ -303,14 +490,13 @@
                 var data = {
                     '_token': $('input[name=_token]').val(),
                     id_peserta: formData[0].value,
-                    id_instruktur: formData[1].value,
-                    biaya: formData[2].value,
-                    jemput: formData[3].value,
-                    biaya_jemput: formData[4].value,
-                    sim: formData[5].value,
-                    biaya_sim: formData[6].value,
-                    diskon: formData[7].value,
-                    status: formData[9].value,
+                    biaya: formData[1].value,
+                    jemput: formData[2].value,
+                    biaya_jemput: formData[3].value,
+                    sim: formData[4].value,
+                    biaya_sim: formData[5].value,
+                    diskon: formData[6].value,
+
                 };
 
                 $.ajax({
@@ -338,9 +524,13 @@
                 var id = formData[0].value
                 var data = {
                     '_token': $('input[name=_token]').val(),
-                    no_plat: formData[1].value,
-                    merk_kursus: formData[2].value,
-                    jenis_kursus: formData[3].value,
+                    id_peserta: formData[1].value,
+                    biaya: formData[2].value,
+                    jemput: formData[3].value,
+                    biaya_jemput: formData[4].value,
+                    sim: formData[5].value,
+                    biaya_sim: formData[6].value,
+                    diskon: formData[7].value,
                 };
 
                 $.ajax({

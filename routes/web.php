@@ -9,6 +9,7 @@ use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\ResetPasswordUserController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\CountriesController;
+use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\KursusController;
 use App\Http\Controllers\MobilController;
 use Illuminate\Support\Facades\Auth;
@@ -34,6 +35,7 @@ Auth::routes([
     'reset' => false, // Password Reset Routes...
     'verify' => false, // Email Verification Routes...
 ]);
+
 Route::get('/countries-list',[CountriesController::class, 'index'])->name('countries.list');
 Route::post('/add-country',[CountriesController::class,'addCountry'])->name('add.country');
 Route::get('/getCountriesList',[CountriesController::class, 'getCountriesList'])->name('get.countries.list');
@@ -47,6 +49,15 @@ Route::get('mobil/get_data', [MobilController::class,'show'])->name('mobil.get_d
 
 Route::RESOURCE('kursus',  KursusController::class );
 Route::get('kursus/get_data', [KursusController::class,'show'])->name('kursus.get_data');
+
+
+Route::RESOURCE('pembayaran',  KursusController::class );
+Route::get('pembayaran/get_data', [KursusController::class,'show'])->name('pembayaran.get_data');
+
+
+Route::RESOURCE('jadwal',  JadwalController::class );
+Route::get('jadwal/get_data', [JadwalController::class,'show'])->name('jadwal.get_data');
+
 
 Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => 'auth'], function () {
 

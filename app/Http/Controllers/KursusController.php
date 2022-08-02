@@ -112,7 +112,7 @@ class KursusController extends Controller
                     // here we prepare the options
                     foreach ($pembayaran as $list) {
                         $no++;
-                        $data .= '<small class="badge badge-success">Pembayaran '.$no.'</small><small>Rp.'.format_uang($list->jumlah).'</small><br>'
+                        $data .= '<small class="badge badge-success">Pembayaran '.$no.'</small><small>  Rp.'.format_uang($list->jumlah).  '</small><button id="' . $row->id . '" class="btn btn-primary btn-xs editbayar"><i class="fas fa-cash-register mr-2"></i></button><br>'
                         ;
                     }
                     $return =
@@ -125,7 +125,9 @@ class KursusController extends Controller
 
 
                 ->addColumn('action', function ($row) {
-                    return ' <button id="' . $row->id . '" class="btn btn-warning btn-sm edit"><i class="fas fa-edit mr-2"></i></button>
+                    return '
+                     <button id="' . $row->id . '" class="btn btn-success btn-sm bayar"><i class="fas fa-cash-register mr-2"></i></button>
+                     <button id="' . $row->id . '" class="btn btn-warning btn-sm edit"><i class="fas fa-edit mr-2"></i></button>
                             <button id="' . $row->id . '" class="btn btn-danger btn-sm delete"><i class="fas fa-trash mr-2"></i></button>
                     ';
                 })
@@ -172,9 +174,13 @@ class KursusController extends Controller
         {
 
             $data = Kursus::findOrFail($id);
-            $data->no_plat = $request->no_plat;
-            $data->merk_mobil = $request->merk_mobil;
-            $data->jenis_mobil = $request->jenis_mobil;
+            $data->id_peserta   = $request->id_peserta;
+            $data->biaya        = $request->biaya;
+            $data->jemput       = $request->jemput;
+            $data->biaya_jemput = $request->biaya_jemput;
+            $data->sim          = $request->sim;
+            $data->biaya_sim    = $request->biaya_sim ;
+            $data->diskon       = $request->diskon;
             $data->update();
 
             return response()->json(['success' => 'Data is successfully updated'], 200);
@@ -189,11 +195,12 @@ class KursusController extends Controller
      * @param  \App\Models\Kursus  $kursus
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Kursus $kursus)
+    public function destroy($id)
     {
         try
         {
-            Kursus::destroy($kursus->id);
+            $data =Kursus::find($id);
+            $data->delete();
 
             return response()->json(['success' => 'Data is successfully deleted'], 200);
         } catch (\Exception $e) {
