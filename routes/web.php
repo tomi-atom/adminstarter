@@ -12,6 +12,7 @@ use App\Http\Controllers\CountriesController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\KursusController;
 use App\Http\Controllers\MobilController;
+use App\Http\Controllers\PembayaranController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -51,8 +52,9 @@ Route::RESOURCE('kursus',  KursusController::class );
 Route::get('kursus/get_data', [KursusController::class,'show'])->name('kursus.get_data');
 
 
-Route::RESOURCE('pembayaran',  KursusController::class );
-Route::get('pembayaran/get_data', [KursusController::class,'show'])->name('pembayaran.get_data');
+Route::RESOURCE('pembayaran',  PembayaranController::class );
+Route::get('pembayaran/get_data', [PembayaranController::class,'show'])->name('pembayaran.get_data');
+Route::get('pembayaran/{id}/editbayar', [PembayaranController::class,'editbayar']);
 
 
 Route::RESOURCE('jadwal',  JadwalController::class );

@@ -51,7 +51,7 @@ class PembayaranController extends Controller
     {
         try
         {
-            Pembayaran::create($request->all());
+           Pembayaran::create($request->all());
 
             return response()->json(['success' => 'Data berhasil ditambahkan'], 200);
         } catch (\Exception $e) {
@@ -150,6 +150,21 @@ class PembayaranController extends Controller
         try
         {
 
+            $data = Kursus::where('id',$id)->first();
+            if($data){
+                return response()->json(['success' => 'successfull retrieve data', 'data' => $data->toJson()], 200);
+            }
+
+
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+        }
+    }
+    public function editbayar($id)
+    {
+        try
+        {
+
             $data = Pembayaran::where('id',$id)->first();
             if($data){
                 return response()->json(['success' => 'successfull retrieve data', 'data' => $data->toJson()], 200);
@@ -174,13 +189,7 @@ class PembayaranController extends Controller
         {
 
             $data = Pembayaran::findOrFail($id);
-            $data->id_peserta   = $request->id_peserta;
-            $data->biaya        = $request->biaya;
-            $data->jemput       = $request->jemput;
-            $data->biaya_jemput = $request->biaya_jemput;
-            $data->sim          = $request->sim;
-            $data->biaya_sim    = $request->biaya_sim ;
-            $data->diskon       = $request->diskon;
+            $data->jumlah   = $request->jumlah;
             $data->update();
 
             return response()->json(['success' => 'Data is successfully updated'], 200);

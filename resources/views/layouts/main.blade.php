@@ -23,6 +23,21 @@
         <link rel="stylesheet" href="{{ asset('admin/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
         <!-- jQuery -->
         <script src="{{ asset('admin') }}/plugins/jquery/jquery.min.js"></script>
+        <link rel="stylesheet" href={{ asset('admin/plugins/daterangepicker/daterangepicker.css') }}">
+        <!-- iCheck for checkboxes and radio inputs -->
+        <link rel="stylesheet" href="{{ asset('admin/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
+        <!-- Bootstrap Color Picker -->
+        <link rel="stylesheet" href="{{ asset('admin/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css"') }}>
+
+        <!-- Select2 -->
+        <link rel="stylesheet" href="{{ asset('admin/plugins/select2/css/select2.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('admin/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
+        <!-- Bootstrap4 Duallistbox -->
+        <link rel="stylesheet" href="{{ asset('admin/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css') }}">
+        <!-- BS Stepper -->
+        <link rel="stylesheet" href="{{ asset('admin/plugins/bs-stepper/css/bs-stepper.min.css') }}">
+        <!-- dropzonejs -->
+        <link rel="stylesheet" href="{{ asset('admin/plugins/dropzone/min/dropzone.min.css') }}">
         @stack('css')
     </head>
 
@@ -91,6 +106,12 @@
         <script src="{{ asset('admin') }}/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
         <!-- AdminLTE App -->
         <script src="{{ asset('admin') }}/dist/js/adminlte.js"></script>
+        <script src="{{ asset('admin') }}plugins/inputmask/jquery.inputmask.min.js"></script>
+        <!-- date-range-picker -->
+        <script src="{{ asset('admin') }}plugins/daterangepicker/daterangepicker.js"></script>
+        <!-- bootstrap color picker -->
+        <script src="{{ asset('admin') }}plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+
 
         <!-- Summernote -->
         <script src="{{ asset('admin') }}/plugins/summernote/summernote-bs4.min.js"></script>

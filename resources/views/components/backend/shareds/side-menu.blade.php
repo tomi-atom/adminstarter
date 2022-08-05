@@ -23,7 +23,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('home.index') }}"  class="nav-link">
+                <a href="{{ route('jadwal.index') }}"  class="nav-link">
                     <i class="nav-icon fas fa-thumbtack"></i>
                     <p>
                         {{ __('Jadwal') }}

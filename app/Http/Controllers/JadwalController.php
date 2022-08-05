@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Jadwal;
 use App\Models\Kursus;
-use App\Models\Pembayaran;
+use App\Models\Mobil;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -29,7 +29,8 @@ class JadwalController extends Controller
             ->where('model_has_roles.role_id','2')
             ->orderBy('users.id', 'ASC')
             ->get();
-        return view('kursus.jadwal.index',compact('peserta','instruktur'));
+        $mobil = Mobil::get();
+        return view('kursus.jadwal.index',compact('peserta','instruktur','mobil'));
     }
 
     /**
@@ -45,7 +46,7 @@ class JadwalController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     *  @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -91,33 +92,31 @@ class JadwalController extends Controller
                         return '<small class="badge badge-danger">Tidak </small>';
                     }
                 })
-                ->addColumn('sim', function ($row) {
-                    if ($row->sim == 1){
-                        return '<small class="badge badge-success">Ya</small> Biaya : <small>Rp.'.format_uang($row->biaya_sim).'</small>';
-                    }
-                    else{
-                        return '<small class="badge badge-danger">Tidak </small>';
-                    }
-                })
+
                 ->addColumn('biaya', function ($row) {
                     return ' <small>Rp.'.format_uang($row->biaya).'</small>';
 
                 })
-                ->addColumn('pembayaran', function ($row) {
-                    $pembayaran = Pembayaran::select('jumlah')
-                        ->leftJoin('kursuses','pembayarans.id_kursus', 'kursuses.id')
+                ->addColumn('jadwal', function ($row) {
+                    $Jadwal = Jadwal::leftJoin('kursuses','Jadwals.id_kursus', 'kursuses.id')
                         ->where('id_kursus',$row->id)
                         ->get();
                     $data = '';
                     $no = 0;
                     // here we prepare the options
-                    foreach ($pembayaran as $list) {
+                    foreach ($Jadwal as $list) {
                         $no++;
-                        $data .= '<small class="badge badge-success">Pembayaran '.$no.'</small><small>  Rp.'.format_uang($list->jumlah).  '</small><button id="' . $row->id . '" class="btn btn-primary btn-xs editbayar"><i class="fas fa-cash-register mr-2"></i></button><br>'
+                        $user = User::select('name')->find($list->id_instruktur);
+                        $data .= '
+                    <small class="badge badge-success">Instruktur '.$no.'</small><small> .'.$user->name.  '</small><small class="badge badge-success">Mulai</small><small class="badge badge-primary">' . $list->jam_mulai. '</small>
+                    <small class="badge badge-success">Jadwal '.$no.'</small><small> .'.$list->tanggal.  '</small><small class="badge badge-success">Mulai</small><small class="badge badge-primary">' . $list->jam_mulai. '</small>
+                    <small class="badge badge-danger">Akhir</small><small class="badge badge-primary">' . $list->jam_akhir . '</small>
+                    <small class="badge badge-warning">Status</small><small class="badge badge-primary">' . $list->status . '</small>
+                     <button id="' . $row->id . '" class="btn btn-primary btn-xs edit"><i class="fas fa-edit mr-2"></i></button><br>'
                         ;
                     }
                     $return =
-                        '<td class="text-left">Total Biaya : Rp.'.format_uang($row->biaya_jemput + $row->biaya_sim+ $row->biaya ). '</td><br>
+                        '
                                 <td class="text-left">' .$data . '</td>
                            ';
                     return $return;
@@ -127,12 +126,10 @@ class JadwalController extends Controller
 
                 ->addColumn('action', function ($row) {
                     return '
-                     <button id="' . $row->id . '" class="btn btn-success btn-sm bayar"><i class="fas fa-cash-register mr-2"></i></button>
-                     <button id="' . $row->id . '" class="btn btn-warning btn-sm edit"><i class="fas fa-edit mr-2"></i></button>
-                            <button id="' . $row->id . '" class="btn btn-danger btn-sm delete"><i class="fas fa-trash mr-2"></i></button>
+                     <button id="' . $row->id . '" class="btn btn-success btn-sm tambah"><i class="fas fa-plus-circle mr-2"></i></button>
                     ';
                 })
-                ->rawColumns(['peserta','instruktur','jemput','sim','biaya','pembayaran','jadwal', 'action'])
+                ->rawColumns(['peserta','instruktur','jemput','jadwal', 'action'])
 
                 ->make(true);
         } catch (\Exception $e) {
@@ -147,6 +144,21 @@ class JadwalController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
+    {
+        try
+        {
+
+            $data = Kursus::where('id',$id)->first();
+            if($data){
+                return response()->json(['success' => 'successfull retrieve data', 'data' => $data->toJson()], 200);
+            }
+
+
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+        }
+    }
+    public function editbayar($id)
     {
         try
         {
@@ -175,9 +187,7 @@ class JadwalController extends Controller
         {
 
             $data = Jadwal::findOrFail($id);
-            $data->no_plat = $request->no_plat;
-            $data->merk_mobil = $request->merk_mobil;
-            $data->jenis_mobil = $request->jenis_mobil;
+            $data->jumlah   = $request->jumlah;
             $data->update();
 
             return response()->json(['success' => 'Data is successfully updated'], 200);

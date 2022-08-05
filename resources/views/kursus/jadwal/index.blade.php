@@ -1,15 +1,15 @@
 @extends('layouts.main')
 
-@section('title', 'Kursus')
+@section('title', 'Jadwal')
 
 @section('breadcump')
     <div class="col-sm-6">
-        <h1 class="m-0">{{ __('Kursus') }}</h1>
+        <h1 class="m-0">{{ __('Jadwal') }}</h1>
     </div>
     <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{ route('backend.dashboard.index') }}">{{ __('Home') }}</a></li>
-            <li class="breadcrumb-item active">{{ __('Kursus') }}</li>
+            <li class="breadcrumb-item active">{{ __('Jadwal') }}</li>
         </ol>
     </div>
     <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">
@@ -37,18 +37,11 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">
-                        {{ __('Data Kursus') }}
+                        {{ __('Data Jadwal') }}
                     </h3>
                 </div>
                 <div class="card-body">
-                    @can('tambah Kursus')
-                        <div class="text-right mb-3">
-                            <button  class="btn btn-primary pull-right create">
-                                <i class="fas fa-plus-circle mr-2"></i>
-                               Tambah
-                            </button>
-                        </div>
-                    @endcan
+
                         <div class="table-responsive">
 
                             <table id="mytable" class="table table-hover">
@@ -57,9 +50,7 @@
                                     <th >NO</th>
                                     <th >Peserta</th>
                                     <th >Jemput </th>
-                                    <th >SIM</th>
-                                    <th >Biaya Kursus</th>
-                                    <th >Pembayaran</th>
+                                    <th >Jadwal</th>
                                     <th >Aksi</th>
                                 </tr>
                                 </thead>
@@ -92,12 +83,6 @@
                                 @endforeach
                             </select>
                         </div>
-
-                        <div class="form-group">
-                            <label >Biaya Kursus</label>
-                            <input type="text" class="form-control biaya" name="biaya" placeholder="Biaya" required>
-                        </div>
-
 
                         <div class="row">
                             <div class="col-sm-6">
@@ -208,11 +193,13 @@
                 <form id="store" data-toggle="validator" method="POST">
                     <div class="modal-body">
 
+                        <input type="hidden" name="id_kursus" class="id_kursus" id="id_kursus">
+
                         <div class="form-group">
-                            <label >Peserta</label>
-                            <select name="id_peserta" id="id_peserta" class="form-control" required>
+                            <label >Instruktur</label>
+                            <select name="id_instruktur" id="id_instruktur" class="form-control" required>
                                 <option value="">Pilih </option>
-                                @foreach($peserta as $list)
+                                @foreach($instruktur as $list)
 
                                     <option value="{{ $list->id }} ">{{ $list->name}}</option>
 
@@ -221,93 +208,37 @@
                         </div>
 
                         <div class="form-group">
-                            <label >Biaya Kursus</label>
-                            <input type="text" class="form-control biaya" name="biaya" placeholder="Biaya" required>
-                        </div>
+                            <label >Mobil</label>
+                            <select name="id_mobil" id="id_mobil" class="form-control" required>
+                                <option value="">Pilih </option>
+                                @foreach($mobil as $list)
 
+                                    <option value="{{ $list->id }} ">{{ $list->merk_mobil}}</option>
 
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <!-- text input -->
-                                <div class="form-group">
-                                    <label>Jemput</label>
-                                    <select class="form-control" id="jemput" name="jemput" required>
-                                        <option value="1"> Ya</option>
-                                        <option value="0"> Tidak </option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label >Biaya Jemput</label>
-                                    <input type="text" class="form-control biaya_jemput" name="biaya_jemput" placeholder="Biaya Jemput" >
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label>SIM</label>
-                                    <select class="form-control" id="sim" name="sim" required>
-                                        <option value="1"> Ya</option>
-                                        <option value="0"> Tidak </option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label >Biaya SIM</label>
-                                    <input type="text" class="form-control biaya_sim" name="biaya_sim" placeholder="Biaya SIM" >
-                                </div>
-                            </div>
-                        </div>
-
-
-
-                        <div class="form-group">
-                            <label >Diskon</label>
-                            <input type="text" class="form-control diskon" name="diskon" placeholder="Diskon" >
-                        </div>
-                        <div class="form-group">
-                            <label for="status">Status</label>
-                            <select class="form-control" id="status" name="status" required>
-                                <option value="1"> Aktif</option>
-                                <option value="0"> Tidak Aktif </option>
+                                @endforeach
                             </select>
                         </div>
 
 
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary btn-save"><i class="fa fa-floppy-o"></i> Simpan </button>
-                        <button type="button" class="btn btn-warning" data-dismiss="modal"><i class="fa fa-arrow-circle-left"></i> Batal </button>
-                    </div>
-
-                </form>
-            </div>
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-    </div>
-    <div  id="modalBayar" class="modal fade" id="modal-lg">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Large Modal</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form id="store" data-toggle="validator" method="POST">
-                    <div class="modal-body">
-
-                        <input type="hidden" name="id_kursus" class="id_kursus" id="id_kursus">
-
                         <div class="form-group">
-                            <label >Jumlah Bayar</label>
-                            <input type="text" class="form-control jumlah" name="jumlah"  id="jumlah"placeholder="Jumlah" required>
+                            <label for="tanggal">Tanggal</label>
+                            <input type="date" class="form-control tanggal" id="tanggal" placeholder="Tanggal" required>
                         </div>
-
+                        <div class="form-group">
+                            <label for="jam_mulai">Jam Mulai</label>
+                            <input type="time" class="form-control jam_mulai" id="jam_mulai" placeholder="Jam Mulai" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="jam_akhir">jam Akhir</label>
+                            <input type="time" class="form-control jam_akhir" id="jam_akhir" placeholder="Jam Akhir" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="status">Status</label>
+                            <select class="form-control" id="status" name="status" required>
+                                <option value="Aktif"> Aktif</option>
+                                <option value="Tidak Aktif"> Tidak Aktif </option>
+                            </select>
+                        </div>
 
 
 
@@ -340,17 +271,18 @@
         "use strict";
 
         $(function () {
+           // $('#jam_mulai').datetimepicker();
+           // $('#jam_akhir').datetimepicker();
+
             $('#mytable').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('kursus.get_data') }}",
+                ajax: "{{ route('jadwal.get_data') }}",
                 columns: [
                     {data:'DT_RowIndex'},
                     {data:'peserta'},
                     {data:'jemput'},
-                    {data:'sim'},
-                    {data:'biaya'},
-                    {data:'pembayaran'},
+                    {data:'jadwal'},
                     {data:'action', orderable:false, searchable:false},
                 ]
             });
@@ -420,14 +352,14 @@
             });
 
             //edit
-            $(document).on('click', '.bayar', function (e) {
+            $(document).on('click', '.tambah', function (e) {
                 e.preventDefault();
                 var id = $(this).attr('id');
 
                 token();
 
                 $.ajax({
-                    url: 'pembayaran/' + id + '/edit',
+                    url: 'jadwal/' + id + '/edit',
                     method: 'get',
                     success: function (result) {
 
@@ -436,8 +368,8 @@
 
                             $('#id_kursus').val(json.id);
 
-                            $('#modalBayar').modal('show');
-                            $('.modal-title').text("Input Pembayaran");
+                            $('#modalAdd').modal('show');
+                            $('.modal-title').text("Input Jadwal");
                         }
 
                     }
@@ -453,7 +385,7 @@
                 token();
 
                 $.ajax({
-                    url: 'pembayaran/' + id + '/editbayar',
+                    url: 'jadwal/' + id + '/editbayar',
                     method: 'get',
                     success: function (result) {
 
@@ -472,59 +404,26 @@
 
             });
 
+
             //store
             $(document).on('submit', '#modalAdd', function (e) {
                 e.preventDefault();
-
-                var formData = $("form#store").serializeArray();
-
                 token();
-
-                var data = {
-                    '_token': $('input[name=_token]').val(),
-                    id_peserta: formData[0].value,
-                    biaya: formData[1].value,
-                    jemput: formData[2].value,
-                    biaya_jemput: formData[3].value,
-                    sim: formData[4].value,
-                    biaya_sim: formData[5].value,
-                    diskon: formData[6].value,
-
-                };
-
                 $.ajax({
-                    url: "kursus",
+                    url: "jadwal",
                     method: 'post',
-                    data: data,
+                    data: {id_kursus:$("#id_kursus").val(),
+                        id_instruktur:$("#id_instruktur").val(),
+                        id_mobil:   $("#id_mobil").val(),
+                        tanggal:    $("#tanggal").val(),
+                        jam_mulai:  $("#jam_mulai").val(),
+                        jam_akhir:  $("#jam_akhir").val(),
+                        status:     $("#status").val(),
+                        "_token":   $('input[name=_token]').val()},
                     success: function (result) {
                         if (result.success) {
                             refresh();
                             $('#modalAdd').modal('hide');
-                            toastr.success(result.success);
-                        }
-                    }
-                });
-            });
-            //store
-            $(document).on('submit', '#modalBayar', function (e) {
-                e.preventDefault();
-
-                var id_kursus= $("#id_kursus").val();
-
-                var jumlah =$("#jumlah").val();
-
-
-                token();
-
-
-                $.ajax({
-                    url: "pembayaran",
-                    method: 'post',
-                    data: {id_kursus:id_kursus,jumlah:jumlah,"_token": $('input[name=_token]').val()},
-                    success: function (result) {
-                        if (result.success) {
-                            refresh();
-                            $('#modalBayar').modal('hide');
                             toastr.success(result.success);
                         }
                     }
@@ -545,7 +444,7 @@
 
 
                 $.ajax({
-                    url: "pembayaran/" + id,
+                    url: "jadwal/" + id,
                     method: 'PUT',
                     data: {id:id,jumlah:jumlah,"_token": $('input[name=_token]').val()},
                     success: function (result) {

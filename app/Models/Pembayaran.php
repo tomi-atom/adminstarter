@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Pembayaran extends Model
 {
     use HasFactory;
+    protected $primaryKey = 'id';
+    protected $fillable = [
+        'id_kursus', 'jumlah'
+    ];
 }
