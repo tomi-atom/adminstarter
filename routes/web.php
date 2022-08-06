@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\ApiJadwalController;
+use App\Http\Controllers\ApiKursusController;
+use App\Http\Controllers\ApiUserController;
 use App\Http\Controllers\Backend\AssignPermissionController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\PermissionController;
@@ -59,6 +62,19 @@ Route::get('pembayaran/{id}/editbayar', [PembayaranController::class,'editbayar'
 
 Route::RESOURCE('jadwal',  JadwalController::class );
 Route::get('jadwal/get_data', [JadwalController::class,'show'])->name('jadwal.get_data');
+
+//API
+
+Route::RESOURCE('apikursus',  ApiKursusController::class );
+Route::get('apikursus/get_data', [ApiKursusController::class,'show'])->name('apikursus.get_data');
+
+
+Route::RESOURCE('apijadwal',  ApiJadwalController::class );
+Route::get('apijadwal/get_data', [ApiJadwalController::class,'show'])->name('apijadwal.get_data');
+
+
+Route::RESOURCE('apiuser',  ApiUserController::class );
+Route::get('apiuser/get_data', [ApiUserController::class,'show'])->name('apiuser.get_data');
 
 
 Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => 'auth'], function () {
