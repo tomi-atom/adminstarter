@@ -73,8 +73,11 @@ Route::RESOURCE('apijadwal',  ApiJadwalController::class );
 Route::get('apijadwal/get_data', [ApiJadwalController::class,'show'])->name('apijadwal.get_data');
 
 
-Route::RESOURCE('apiuser',  ApiUserController::class );
-Route::get('apiuser/get_data', [ApiUserController::class,'show'])->name('apiuser.get_data');
+
+Route::post('apilogin', [ApiUserController::class, 'login']);
+Route::post('apiregister', [ApiUserController::class, 'register']);
+Route::put('apiupdate-user/{id}', [ApiUserController::class, 'update']);
+Route::post('apiupload-user/{id}', [ApiUserController::class, 'upload']);
 
 
 Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => 'auth'], function () {

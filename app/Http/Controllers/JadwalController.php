@@ -98,7 +98,7 @@ class JadwalController extends Controller
 
                 })
                 ->addColumn('jadwal', function ($row) {
-                    $Jadwal = Jadwal::leftJoin('kursuses','Jadwals.id_kursus', 'kursuses.id')
+                    $Jadwal = Jadwal::leftJoin('kursuses','jadwals.id_kursus', 'kursuses.id')
                         ->where('id_kursus',$row->id)
                         ->get();
                     $data = '';
